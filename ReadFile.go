@@ -50,7 +50,7 @@ func main(){
 	// Calling the coordinator
 	Total_sum := Coordinator(File_Name,Number_Of_Workers);
 
-	// Printing the sum
+	// The sum is printed after the parallel sum addition is computed 
 	fmt.Println("Total sum of the integers in the file is:",Total_sum);
 	elapsed := time.Since(start)
 	fmt.Println("Time taken for the program to complete:",elapsed)
@@ -64,7 +64,7 @@ func Coordinator( FileName string ,NumberOfWorkers string) int64 {
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	//Creating the workers and sending them 
 	wg := new(sync.WaitGroup)
 	wg.Add(NoOfWorkers)
 
@@ -390,5 +390,6 @@ func Worker (b []byte,c chan []byte,wg *sync.WaitGroup){
 	//out is sent back to the coordinator to intimate that the work assigned for the given thread is completed using channels
 	c <- out
 	}
+	//worker Thread to be destroyed
 	wg.Done()
 }
